@@ -22,7 +22,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:text="@string/ram_singh_chauhan"
-        android:gravity="center" />
+        android:gravity="center"
+        android:editable="false"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -45,4 +47,5 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="30sp"
         android:layout_marginBottom="63dp" />
+
 </RelativeLayout>
