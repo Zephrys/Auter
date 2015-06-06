@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.Parse;
+
 
 public class MainActivity extends ActionBarActivity {
 
