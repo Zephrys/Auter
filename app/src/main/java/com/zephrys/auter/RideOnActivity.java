@@ -1,5 +1,7 @@
 package com.zephrys.auter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -66,11 +68,30 @@ public class RideOnActivity extends ActionBarActivity {
             panic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Panic_Activity.class);
 
-                    startActivity(intent);
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.panic)
+                            .setMessage("Are you sure you want to invoke the Panic message, this would alert to the concerned authorities with your details?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getActivity(), Panic_Activity.class);
+
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+
+
                 }
             });
+
+
             return rootView;
         }
     }

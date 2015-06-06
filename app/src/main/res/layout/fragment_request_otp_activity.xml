@@ -19,26 +19,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/enter_mobile_number"
-        android:layout_below="@+id/aadhar_user_input_otp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:hint="10 digit Mobile Number"
-        android:gravity="center" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send OTP"
         android:id="@+id/send_otp_button"
-        android:layout_below="@+id/enter_mobile_number"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp" />
+        android:layout_marginTop="78dp"
+        android:layout_below="@+id/aadhar_user_input_otp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -60,6 +48,15 @@
         android:layout_below="@+id/enter_otp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/out"
+        android:layout_below="@+id/aadhar_user_input_otp"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
