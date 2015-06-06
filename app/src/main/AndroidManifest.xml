@@ -24,6 +24,10 @@
             android:name=".RideOnActivity"
             android:label="@string/title_activity_ride_on" >
         </activity>
+        <activity
+            android:name=".Panic_Activity"
+            android:label="@string/title_activity_panic_" >
+        </activity>
     </application>
 
 </manifest>
