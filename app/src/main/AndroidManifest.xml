@@ -28,6 +28,10 @@
             android:name=".Panic_Activity"
             android:label="@string/title_activity_panic_" >
         </activity>
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
     </application>
 
 </manifest>

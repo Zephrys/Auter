@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -26,6 +27,10 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new StartFragment())
                     .commit();
         }
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
     }
 
 
@@ -80,6 +85,18 @@ public class MainActivity extends ActionBarActivity {
                     // it may also bring some information along with it, we can use this aNum in the other activity, < please remove these comments once you are done and add something more legible to us later
                     intent.putExtra(Intent.EXTRA_TEXT, aNum);
 
+                    startActivity(intent);
+                }
+            });
+
+
+            // TODO: REMOVE THIS BUTTON FRMO HERE TO A NEW SIGNUP CLASS
+
+            Button button = (Button) rootView.findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), SignUp.class);
                     startActivity(intent);
                 }
             });

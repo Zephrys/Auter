@@ -17,5 +17,6 @@
     <string name="panic">Panic!</string>
     <string name="safely_reached">Safely Reached!</string>
     <string name="title_activity_panic_">Panic_Activity</string>
+    <string name="title_activity_sign_up">Sign Up!</string>
 
 </resources>
