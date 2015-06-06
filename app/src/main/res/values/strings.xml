@@ -8,5 +8,12 @@
     <string name="aadhar_format">12 digit Aadhar Number</string>
     <string name="start_journey_button">Start a Ride!</string>
     <string name="title_activity_ride_on">RideOnActivity</string>
+    <string name="ram_singh_chauhan">Ram Singh Chauhan\n
+    something sommething \n
+    this is great \n
+    panic anic</string>
+
+    <string name="panic">Panic!</string>
+    <string name="safely_reached">Safely Reached!</string>
 
 </resources>
