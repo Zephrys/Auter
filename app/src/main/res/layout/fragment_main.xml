@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/enter_text_label"
-        android:textSize="20    sp"
+        android:textSize="20sp"
         />
 
     <EditText
