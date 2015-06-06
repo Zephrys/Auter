@@ -4,5 +4,19 @@
     <string name="app_name">Auter</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="enter_driver_aadhar">Enter Aadhar Number of Driver</string>
+    <string name="aadhar_format">12 digit Aadhar Number</string>
+    <string name="start_journey_button">Start a Ride!</string>
+
+    <!--TODO change the title_activity_ride_on ka text-->
+    <string name="title_activity_ride_on">RideOnActivity</string>
+
+    <string name="ram_singh_chauhan">Ram Singh Chauhan\n
+    something sommething \n
+    this is great \n
+    panic anic</string>
+
+    <string name="panic">Panic!</string>
+    <string name="safely_reached">Safely Reached!</string>
 
 </resources>

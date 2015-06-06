@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RideOnActivity"
+            android:label="@string/title_activity_ride_on" >
+        </activity>
     </application>
 
 </manifest>
