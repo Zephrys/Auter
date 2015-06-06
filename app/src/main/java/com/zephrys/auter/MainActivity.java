@@ -1,5 +1,6 @@
 package com.zephrys.auter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -97,6 +99,35 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), SignUp.class);
+                    startActivity(intent);
+                }
+            });
+
+            // TODO: transfer someplace else
+//
+//            EditText aadharNum = (EditText) rootView.findViewById(R.id.aadhar_user_input_edittext);
+//
+//            final String aNum = aadharNum.getText().toString();
+
+
+            Button button1 = (Button) rootView.findViewById(R.id.request_otp_button);
+            button1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    // was first trying to use this value itself, now I have used a different edittext in the other screen!! :D, please don't remove this
+
+                    /*if(aNum.length() != 12) {
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Put in proper 12 digit aadhar num", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }*/
+
+
+
+                    Intent intent = new Intent(getActivity(), Request_otp_activity.class);
+//                    intent.putExtra(Intent.EXTRA_TEXT, aNum);
                     startActivity(intent);
                 }
             });
