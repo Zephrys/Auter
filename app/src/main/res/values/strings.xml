@@ -20,5 +20,6 @@
     <string name="title_activity_sign_up">Sign Up!</string>
     <string name="panic_label">Fret not, the nearest police station have been updated with your complain and your location is being actively tracked.</string>
     <string name="report_safe_button">Report Safe</string>
+    <string name="title_activity_request_otp_activity">Request OTP</string>
 
 </resources>
