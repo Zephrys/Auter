@@ -1,5 +1,6 @@
 package com.zephrys.auter;
 
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,11 @@ public class SignUp extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+
         setContentView(R.layout.activity_sign_up);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
