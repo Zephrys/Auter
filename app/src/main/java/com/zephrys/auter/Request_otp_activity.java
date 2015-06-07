@@ -131,13 +131,8 @@ public class Request_otp_activity extends ActionBarActivity {
                         e.printStackTrace();
                     }
 
+                    t1.setText(res[0]);
 
-                    if (res[0] == "true"){
-                        t1.setText("Sent!");
-                    }
-                    else{
-                        t1.setText("Check Connectivity.");
-                    }
                 }
             });
 
@@ -240,7 +235,7 @@ public class Request_otp_activity extends ActionBarActivity {
                 Boolean otp_sent = false;
                 DefaultHttpClient client = new DefaultHttpClient();
                 HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-
+                String result[] = new String[1];
                 //adding ssl capabilities
                 SchemeRegistry registry = new SchemeRegistry();
                 SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
@@ -273,6 +268,11 @@ public class Request_otp_activity extends ActionBarActivity {
                         Log.d("stream", body);
                         if(body.indexOf("success\":true") > 0) {
                             otp_sent= true;
+                            result[0] = "Sent!";
+                        }
+                        if(body.indexOf("success\":false") > 0) {
+                            otp_sent= true;
+                            result[0] = "Invalid Aadhar Number!";
                         }
                         // insteas of this I will introduce android toast!
 //                        t1.setText("Details are correct");
@@ -282,17 +282,11 @@ public class Request_otp_activity extends ActionBarActivity {
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
-                if(otp_sent==true) {
+                if(otp_sent==true) {Log.d("AsyncTask", "OTP succesfully sent");return result; }
 //                    t1.setText("OTP succesfully sent.");
-                    Log.d("AsyncTask", "OTP succesfully sent");
-                    String result[] = new String[1];
-                    result[0] = "true";
-                    return result;
-                }
 
-                String result[] = new String[1];
-                result[0] = "false";
-                return result;
+                    result[0] = "Check Connectivity.";
+                    return result;
 
             }
 
