@@ -48,4 +48,14 @@
         android:layout_marginLeft="30sp"
         android:layout_marginBottom="63dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/aadhar_view"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:visibility="invisible" />
+
 </RelativeLayout>

@@ -6,25 +6,44 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 public class RideOnActivity extends ActionBarActivity {
+
+    Long mAadarNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_on);
+
+        Intent intent = getIntent();
+        mAadarNum = Long.valueOf(intent.getStringExtra(Intent.EXTRA_TEXT));
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new RideOnFragment())
+                    .add(R.id.container, new RideOnFragment(mAadarNum))
                     .commit();
         }
+
     }
 
 
@@ -55,13 +74,58 @@ public class RideOnActivity extends ActionBarActivity {
      */
     public static class RideOnFragment extends Fragment {
 
-        public RideOnFragment() {
+        Long aadhar;
+
+        public RideOnFragment(Long a) {
+            aadhar = a;
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_ride_on, container, false);
+
+            TextView aadhar_view = (TextView) rootView.findViewById(R.id.aadhar_view);
+            aadhar_view.setVisibility(View.VISIBLE);
+            aadhar_view.setText(aadhar.toString());
+
+            final EditText dispInfo = (EditText) rootView.findViewById(R.id.info_driver_edittext);
+            dispInfo.setText("");
+
+            Toast toast = Toast.makeText(getActivity(), "Fetching Data!", Toast.LENGTH_SHORT);
+            toast.show();
+
+            String printed = "Some Network error! Try again!";
+
+            // Fetching data from parse.com!!
+
+            ParseQuery<ParseObject> getUser = ParseQuery.getQuery("Users");
+            getUser.whereEqualTo("ID", aadhar.toString());
+            getUser.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> parseObjects, ParseException e) {
+                    if(e == null) {
+                        ParseObject first = parseObjects.get(0);
+                        String temp1 = first.getString("Name");
+                        temp1  += "\n" + first.getString("Address");
+                        dispInfo.setText(temp1);
+                    } else {
+                        Toast toast = Toast.makeText(getActivity(), "Network Error! Try again", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+            });
+            /*getUser.getInBackground("Bhiw4UCznt", new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject parseObject, ParseException e) {
+                    if (e == null) {
+                        String temp1 = parseObject.getString("Address");
+                        dispInfo.setText(temp1);
+                    } else {
+                        Log.e("Exception", e.getMessage());
+                    }
+                }
+            });*/
 
             Button panic = (Button) rootView.findViewById(R.id.panic_button);
 

@@ -13,7 +13,7 @@ public class App extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "9NwVNUzm8puqlnZbeAWWChBDJNeibAt6bA0ZbDtp", "WTsHfOfYJVK0ysD1z8OCZP32dy2s3BCOtE9TF0aQ");
+        Parse.initialize(this, "zU277hQ68BQBoxiWnprRysK8ZVP1NpkWL4lIzt0k", "oViPPq5knlwGskyrmNCuQfCzPpdYvxnxc1kTnYV5");
     }
 }
 
