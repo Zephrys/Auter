@@ -105,10 +105,17 @@ public class RideOnActivity extends ActionBarActivity {
                 @Override
                 public void done(List<ParseObject> parseObjects, ParseException e) {
                     if(e == null) {
-                        ParseObject first = parseObjects.get(0);
-                        String temp1 = first.getString("Name");
-                        temp1  += "\n" + first.getString("Address");
-                        dispInfo.setText(temp1);
+                        try {
+                            ParseObject first = parseObjects.get(0);
+                            String temp1 = first.getString("Name");
+                            temp1 += "\n" + first.getString("Address");
+                            dispInfo.setText(temp1);
+                        }
+                        catch (Exception some) {
+                            Toast toast = Toast.makeText(getActivity(), "Data not available", Toast.LENGTH_SHORT);
+                            toast.show();
+                            dispInfo.setText("We don't have the details of the Current Driver GYANI CHANGE THIS< CANT THINK OF SOMETHING");
+                        }
                     } else {
                         Toast toast = Toast.makeText(getActivity(), "Network Error! Try again", Toast.LENGTH_SHORT);
                         toast.show();

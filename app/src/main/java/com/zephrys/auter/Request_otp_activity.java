@@ -213,8 +213,15 @@ public class Request_otp_activity extends ActionBarActivity {
                 }
             });
 
+            Button altSignup = (Button) rootView.findViewById(R.id.button);
+            altSignup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), SignUp.class);
 
-            // TODO:: <<<GYANI>>> add the code to send the otp request here
+                    startActivity(intent);
+                }
+            });
 
             return rootView;
         }

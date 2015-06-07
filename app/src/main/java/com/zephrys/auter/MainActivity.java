@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -97,53 +99,16 @@ public class MainActivity extends ActionBarActivity {
 
                     String aNum = aadharNum.getText().toString();
 
-                    // Gyani: an intent basically like a message, conveys where is it coming from and which activity does it point to
-                    Intent intent = new Intent(getActivity(), RideOnActivity.class);
-                    // it may also bring some information along with it, we can use this aNum in the other activity, < please remove these comments once you are done and add something more legible to us later
-                    intent.putExtra(Intent.EXTRA_TEXT, aNum);
-
-                    startActivity(intent);
-                }
-            });
-
-
-            // TODO: REMOVE THIS BUTTON FRMO HERE TO A NEW SIGNUP CLASS
-
-            Button button = (Button) rootView.findViewById(R.id.button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), SignUp.class);
-                    startActivity(intent);
-                }
-            });
-
-            // TODO: transfer someplace else
-//
-//            EditText aadharNum = (EditText) rootView.findViewById(R.id.aadhar_user_input_edittext);
-//
-//            final String aNum = aadharNum.getText().toString();
-
-
-            Button button1 = (Button) rootView.findViewById(R.id.request_otp_button);
-            button1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    // was first trying to use this value itself, now I have used a different edittext in the other screen!! :D, please don't remove this
-
-                    /*if(aNum.length() != 12) {
-                        Context context = getActivity().getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Put in proper 12 digit aadhar num", Toast.LENGTH_SHORT);
+                    if(aNum.length() != 12) {
+                        Toast toast = Toast.makeText(getActivity(), "Please enter a valid 12-digit aadhar number", Toast.LENGTH_SHORT);
                         toast.show();
                         return;
-                    }*/
+                    } else {
+                        Intent intent = new Intent(getActivity(), RideOnActivity.class);
+                        intent.putExtra(Intent.EXTRA_TEXT, aNum);
 
-
-
-                    Intent intent = new Intent(getActivity(), Request_otp_activity.class);
-//                    intent.putExtra(Intent.EXTRA_TEXT, aNum);
-                    startActivity(intent);
+                        startActivity(intent);
+                    }
                 }
             });
             return rootView;

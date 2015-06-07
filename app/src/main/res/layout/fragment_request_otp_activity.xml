@@ -14,7 +14,7 @@
         android:id="@+id/aadhar_user_input_otp"
         android:hint="@string/aadhar_format"
 
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="64dp"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -24,9 +24,8 @@
         android:layout_height="wrap_content"
         android:text="Send OTP"
         android:id="@+id/send_otp_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp"
-        android:layout_below="@+id/aadhar_user_input_otp" />
+        android:layout_below="@+id/out"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,11 +33,10 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/enter_otp"
-        android:layout_below="@+id/send_otp_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
         android:hint="enter otp here"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -56,6 +54,16 @@
         android:id="@+id/out"
         android:layout_below="@+id/aadhar_user_input_otp"
         android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SignUp through Demographic details"
+        android:id="@+id/button"
+        android:layout_below="@+id/check_otp_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
 
 
 </RelativeLayout>
