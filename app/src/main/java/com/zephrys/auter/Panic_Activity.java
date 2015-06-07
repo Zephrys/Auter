@@ -1,5 +1,6 @@
 package com.zephrys.auter;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 
 
 public class Panic_Activity extends ActionBarActivity {
@@ -60,6 +62,15 @@ public class Panic_Activity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_panic, container, false);
+
+            Button report_safe = (Button) rootView.findViewById(R.id.button2);
+            report_safe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), RideOnActivity.class);
+                    startActivity(intent);
+                }
+            });
 
             return rootView;
         }
