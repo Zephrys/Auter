@@ -36,6 +36,10 @@ public class RideOnActivity extends ActionBarActivity {
         setContentView(R.layout.activity_ride_on);
 
         Intent intent = getIntent();
+        if(intent.getBooleanExtra("print_safe", false)) {
+            Toast toast = Toast.makeText(this, "I am safe!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
         mAadarNum = Long.valueOf(intent.getStringExtra(Intent.EXTRA_TEXT));
 
         if (savedInstanceState == null) {
@@ -112,9 +116,10 @@ public class RideOnActivity extends ActionBarActivity {
                             dispInfo.setText(temp1);
                         }
                         catch (Exception some) {
-                            Toast toast = Toast.makeText(getActivity(), "Data not available", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getActivity(), "Aadhar does not belong to a Registered Driver", Toast.LENGTH_SHORT);
                             toast.show();
-                            dispInfo.setText("We don't have the details of the Current Driver GYANI CHANGE THIS< CANT THINK OF SOMETHING");
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
                         }
                     } else {
                         Toast toast = Toast.makeText(getActivity(), "Network Error! Try again", Toast.LENGTH_SHORT);
@@ -158,6 +163,35 @@ public class RideOnActivity extends ActionBarActivity {
                                 }
                             }).show();
 
+
+                }
+            });
+
+            Button safe = (Button) rootView.findViewById(R.id.safe_button);
+
+            safe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Confirm Safe?")
+                            .setMessage("Are you sure you want to mark yourself safe and end this ride?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    intent.putExtra("print_completion", true);
+                                    startActivity(intent);
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
 
                 }
             });

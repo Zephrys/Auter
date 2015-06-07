@@ -104,7 +104,14 @@ public class Request_otp_activity extends ActionBarActivity {
                 @Override
                 public void onClick(View view) {
 
+
                     String aadhar = ((EditText) getActivity().findViewById(R.id.aadhar_user_input_otp)).getText().toString();
+                    if(aadhar.length() != 12) {
+                        Toast toast = Toast.makeText(getActivity(), "Please enter a valid 12-digit aadhar number", Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }
+
                     String son1 = "{ \"aadhaar-id\": \""+aadhar+"\", \"channel\":\"SMS\", \"location\": { \"type\": \"gps\", \"latitude\": \"73.2\", \"longitude\": \"22.3\", \"altitude\": \"0\" } }";
 
                     String[] inputArr = new String[] {
@@ -112,7 +119,6 @@ public class Request_otp_activity extends ActionBarActivity {
                             son1,
                     };
 
-                    // Use return Value TODO GYANI!!
                     TextView t1 = (TextView) rootView.findViewById(R.id.out);
                     t1.setText(("Sending OTP."));
 
@@ -144,6 +150,13 @@ public class Request_otp_activity extends ActionBarActivity {
                     Log.d("I am here", "YE");
                     //get the various required fields
                     String otp = ((EditText) rootView.findViewById(R.id.enter_otp)).getText().toString();
+
+                    if(otp.length() != 6) {
+                        Toast toast = Toast.makeText(getActivity(), "Please enter a valid 6-digit OTP", Toast.LENGTH_SHORT);
+                        toast.show();
+                        ((EditText) rootView.findViewById(R.id.enter_otp)).setText("");
+                        return;
+                    }
                     String aadhar = ((EditText) rootView.findViewById(R.id.aadhar_user_input_otp)).getText().toString();
                     String son1 = "{\"consent\":\"Y\", \"auth-capture-request\":{\"aadhaar-id\": \""+aadhar+"\", \"modality\":\"otp\", \"otp\":\""+otp+"\", \"device-id\":\"MAC\", \"certificate-type\":\"preprod\",  \"location\": { \"type\": \"gps\", \"latitude\": \"73.2\", \"longitude\": \"22.3\", \"altitude\": \"0\" } } }";
                     TextView t1 = (TextView) rootView.findViewById(R.id.out);
@@ -154,7 +167,6 @@ public class Request_otp_activity extends ActionBarActivity {
                             son1,
                     };
 
-                    // Use return Value TODO GYANI!!
                     t1.setText(("Checking Password"));
 
                     String res[] = new String[7];
@@ -210,16 +222,6 @@ public class Request_otp_activity extends ActionBarActivity {
                     else{
                         t1.setText("Try Again!");
                     }
-                }
-            });
-
-            Button altSignup = (Button) rootView.findViewById(R.id.button);
-            altSignup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), SignUp.class);
-
-                    startActivity(intent);
                 }
             });
 

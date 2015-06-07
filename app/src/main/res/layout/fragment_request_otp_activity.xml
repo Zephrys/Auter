@@ -33,7 +33,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/enter_otp"
-        android:hint="enter otp here"
+        android:hint="enter OTP here"
         android:gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -54,16 +54,6 @@
         android:id="@+id/out"
         android:layout_below="@+id/aadhar_user_input_otp"
         android:layout_centerHorizontal="true" />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SignUp through Demographic details"
-        android:id="@+id/button"
-        android:layout_below="@+id/check_otp_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
 
 
 </RelativeLayout>

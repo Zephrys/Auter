@@ -68,6 +68,7 @@ public class Panic_Activity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), RideOnActivity.class);
+                    intent.putExtra("print_safe", true);
                     startActivity(intent);
                 }
             });
