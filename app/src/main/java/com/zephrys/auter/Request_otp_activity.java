@@ -66,8 +66,8 @@ public class Request_otp_activity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return false;
+        getMenuInflater().inflate(R.menu.menu_request_otp_activity, menu);
+        return true;
     }
 
     @Override
@@ -174,8 +174,10 @@ public class Request_otp_activity extends ActionBarActivity {
                     }
 
                     // TODO change to ==.. for dev purposes!!!! :DDDD:
-                    if (res[6] == "true"){
-                        t1.setText("Logged IN!");
+
+
+                    if (res[6] == "Logged In Successfully"){
+                        t1.setText(res[6]);
 
                         try {
                             // TODO add parse user: db here!
@@ -215,7 +217,7 @@ public class Request_otp_activity extends ActionBarActivity {
                         getActivity().finish();
                     }
                     else{
-                        t1.setText("Try Again!");
+                        t1.setText(res[6]);
                     }
                 }
             });
@@ -259,7 +261,7 @@ public class Request_otp_activity extends ActionBarActivity {
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                     post.setEntity(se);
                     response = httpClient.execute(post);
-
+ 
                     /*Checking response */
                     if(response!=null){
                         Log.d("RESPONSE", "FOUND");
@@ -274,8 +276,7 @@ public class Request_otp_activity extends ActionBarActivity {
                             otp_sent= true;
                             result[0] = "Invalid Aadhar Number!";
                         }
-                        // insteas of this I will introduce android toast!
-//                        t1.setText("Details are correct");
+                          //t1.setText("Details are correct");
                         Log.d("AsyncTask", "done done Details Correct");
                     }
 
@@ -285,8 +286,8 @@ public class Request_otp_activity extends ActionBarActivity {
                 if(otp_sent==true) {Log.d("AsyncTask", "OTP succesfully sent");return result; }
 //                    t1.setText("OTP succesfully sent.");
 
-                    result[0] = "Check Connectivity.";
-                    return result;
+                result[0] = "Check Connectivity.";
+                return result;
 
             }
 
@@ -318,15 +319,14 @@ public class Request_otp_activity extends ActionBarActivity {
 
                 String[] output = new String[7];
                 HttpResponse response;
-                //JSONObject json = new JSONObject();
-//                    Log.d("I am here", "YE");
+
                 try {
                     HttpPost post = new HttpPost("https://ac.khoslalabs.com/hackgate/hackathon/kyc/raw");
                     StringEntity se = new StringEntity(son1);
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                     post.setEntity(se);
                     response = httpClient.execute(post);
-
+ 
                     /*Checking response */
                     if(response!=null){
                         Log.d("RESPONSE", "FOUND");
@@ -338,19 +338,8 @@ public class Request_otp_activity extends ActionBarActivity {
                         if(body.indexOf("photo") > 0) {
                             otp_sent= true;
                             String goon =  "aadhaar";
-                            String p;
-//                            p = "\"aadhaar-id\":\"(\\d*)\",\"photo\":\"(.*)\",\"poi\":\\{\"name\":\"([a-zA-Z\\s]*)\",\"dob\":\"([0-9\\-]*)\",\"gender\":\"(\\w)\"";
-//                            Log.d("pattern", p);
-//                            Pattern r = Pattern.compile(p);
-//                            Matcher m = r.matcher(body);
-//                            if(m.find()) {
-//                                output[0] = "" + m.group(0);
-//                                output[1] = "" + m.group(1);
-//                                output[2] = "" + m.group(2);
-//                                output[3] = "" + m.group(3);
-//                                output[4] = "" + m.group(4);
-////                                output[5] = "" + m.group(5);
-//                            }
+
+
 
                             JSONObject object = new JSONObject(body);
                             String syncresponse = object.getString("kyc");
@@ -405,6 +394,15 @@ public class Request_otp_activity extends ActionBarActivity {
                             }
 
                         }
+
+                        if(body.indexOf("success\":true") > 0) {
+                            otp_sent= true;
+                            output[6] = "Logged In Succesfully";
+                        }
+                        if(body.indexOf("success\":false") > 0) {
+                            otp_sent= true;
+                            output[6] = "Invalid OTP.";
+                        }
                     }
                 } catch(Exception e) {
                     e.printStackTrace();
@@ -412,12 +410,11 @@ public class Request_otp_activity extends ActionBarActivity {
                 if(otp_sent==true) {
 //                    t1.setText("OTP entered correctly.");
                     Log.d("AsyncTask", "Otp Entered correctly");
-                    output[6] = "true";
                 }
                 else{
 //                    t1.setText("Incorrect OTP entered.");
                     Log.d("AsyncTask", "Otp Entered was wrong");
-                    output[6] = "false" ;
+                    output[6] = "Check Connectivity" ;
                 }
 
                 return output;
