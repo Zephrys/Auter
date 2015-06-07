@@ -103,7 +103,7 @@ public class RideOnActivity extends ActionBarActivity {
 
             // Fetching data from parse.com!!
 
-            ParseQuery<ParseObject> getUser = ParseQuery.getQuery("Users");
+            ParseQuery<ParseObject> getUser = ParseQuery.getQuery("Cabbies");
             getUser.whereEqualTo("ID", aadhar.toString());
             getUser.findInBackground(new FindCallback<ParseObject>() {
                 @Override
