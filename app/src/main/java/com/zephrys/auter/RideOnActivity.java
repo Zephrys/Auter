@@ -54,8 +54,8 @@ public class RideOnActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ride_on, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return false;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class RideOnActivity extends ActionBarActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_ride_on, container, false);
 
@@ -105,6 +105,7 @@ public class RideOnActivity extends ActionBarActivity {
 
             ParseQuery<ParseObject> getUser = ParseQuery.getQuery("Cabbies");
             getUser.whereEqualTo("ID", aadhar.toString());
+
             getUser.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -127,17 +128,6 @@ public class RideOnActivity extends ActionBarActivity {
                     }
                 }
             });
-            /*getUser.getInBackground("Bhiw4UCznt", new GetCallback<ParseObject>() {
-                @Override
-                public void done(ParseObject parseObject, ParseException e) {
-                    if (e == null) {
-                        String temp1 = parseObject.getString("Address");
-                        dispInfo.setText(temp1);
-                    } else {
-                        Log.e("Exception", e.getMessage());
-                    }
-                }
-            });*/
 
             Button panic = (Button) rootView.findViewById(R.id.panic_button);
 
@@ -152,7 +142,7 @@ public class RideOnActivity extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getActivity(), Panic_Activity.class);
-
+                                    intent.putExtra(Intent.EXTRA_TEXT, aadhar.toString());
                                     startActivity(intent);
                                 }
                             })

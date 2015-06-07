@@ -20,9 +20,12 @@ public class Panic_Activity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panic);
+
+        String anum = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new PlaceholderFragment(anum))
                     .commit();
         }
     }
@@ -31,8 +34,8 @@ public class Panic_Activity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_panic_, menu);
-        return true;
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return false;
     }
 
     @Override
@@ -55,7 +58,10 @@ public class Panic_Activity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
+        String anum;
+
+        public PlaceholderFragment(String anum) {
+            this.anum = anum;
         }
 
         @Override
@@ -69,7 +75,9 @@ public class Panic_Activity extends ActionBarActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), RideOnActivity.class);
                     intent.putExtra("print_safe", true);
+                    intent.putExtra(Intent.EXTRA_TEXT, anum);
                     startActivity(intent);
+                    getActivity().finish();
                 }
             });
 
