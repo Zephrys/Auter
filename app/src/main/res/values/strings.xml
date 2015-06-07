@@ -13,7 +13,7 @@
 
     <string name="panic">Panic!</string>
     <string name="safely_reached">Safely Reached!</string>
-    <string name="title_activity_panic_">Panic_Activity</string>
+    <string name="title_activity_panic_">Stay Alert!</string>
     <string name="title_activity_sign_up">Sign Up!</string>
     <string name="panic_label">Fret not, the nearest police station have been updated with your complain and your location is being actively tracked.</string>
     <string name="report_safe_button">Report Safe</string>
