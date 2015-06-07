@@ -34,6 +34,13 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new StartFragment())
                     .commit();
         }
+
+
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra("print_completion", false)) {
+            Toast toast = Toast.makeText(this, "Ride ended Safely!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @Override
