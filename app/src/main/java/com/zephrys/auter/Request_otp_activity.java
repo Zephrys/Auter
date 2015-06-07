@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -35,12 +38,9 @@ import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.net.ssl.HostnameVerifier;
 
@@ -167,22 +167,37 @@ public class Request_otp_activity extends ActionBarActivity {
                     }
 
                     // TODO change to ==.. for dev purposes!!!! :DDDD:
-                    if (res[6] != "true"){
+                    if (res[6] == "true" || res[6] != "true"){
                         t1.setText("Logged IN!");
 
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("SIGNUP_DONE", true);
-                        editor.commit();
+                        try {
+                            // TODO add parse user: db here!
+                            ParseObject newUser = new ParseObject("Users");
+                            //newUser.put("objectId", "bar"/*res[0]*/);
+                            newUser.put("ID", res[0]);
+                            newUser.put("Name", res[4]);
+                            newUser.put("Address", res[5]);
+                            newUser.put("Photo", res[1]);
+                            //TODO add more fields
+                            newUser.saveInBackground();
+                        }
+                        catch (Exception e)
+                        {
+                            Log.e("Exception", "Data Invalid");
+                        }
 
-
-                        // TODO add parse user: db here!!!
-                        
+                        Log.d("VAL", "value in users stored");
 
 
                         // Welcome new user!
                         Toast toast = Toast.makeText(getActivity(), "Welcome " + res[4], Toast.LENGTH_SHORT);
                         toast.show();
+
+
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("SIGNUP_DONE", true);
+                        editor.commit();
 
                         // Activity calling!!
 
@@ -333,6 +348,7 @@ public class Request_otp_activity extends ActionBarActivity {
 //                                output[4] = "" + m.group(4);
 ////                                output[5] = "" + m.group(5);
 //                            }
+
                             JSONObject object = new JSONObject(body);
                             String syncresponse = object.getString("kyc");
                             JSONObject object2 = new JSONObject(syncresponse);
@@ -345,7 +361,41 @@ public class Request_otp_activity extends ActionBarActivity {
                             output[3] = object21.getString("dob");
                             String poa = object2.getString("poa");
                             object21 = new JSONObject(poa);
-                            output[5] = object21.getString("pc");
+                            output[5] = "";
+                            if(object21.has("house")) {
+                                if(output[5].length()>0){output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("house");
+                            }
+                            if(object21.has("street")) {
+                                if(output[5].length()>0) {
+                                    output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("street");
+                            }
+                            if(object21.has("lm")) {
+                                if(output[5].length()>0){output[5] =output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("lm");
+                            }
+                            if(object21.has("loc")) {
+                                if(output[5].length()>0){output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("loc");
+                            }
+                            if(object21.has("vtc")) {
+                                if(output[5].length()>0){output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("vtc");
+                            }
+                            if(object21.has("subdist")) {
+                                if(output[5].length()>0){output[5] = output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("subdist");
+                            }
+
+                            if(object21.has("state")) {
+                                if(output[5].length()>0){output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("state");
+                            }
+                            if(object21.has("pc")) {
+                                if(output[5].length()>0){output[5]= output[5] + ", ";}
+                                output[5] = output[5] + object21.getString("pc");
+                            }
 
                             for(int i = 0 ; i<=4 ; i++){
                                 Log.d("JSON", output[i]);
