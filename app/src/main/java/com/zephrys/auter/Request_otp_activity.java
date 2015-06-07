@@ -174,7 +174,7 @@ public class Request_otp_activity extends ActionBarActivity {
                     }
 
                     // TODO change to ==.. for dev purposes!!!! :DDDD:
-                    if (res[6] == "true" || res[6] != "true"){
+                    if (res[6] == "true"){
                         t1.setText("Logged IN!");
 
                         try {
