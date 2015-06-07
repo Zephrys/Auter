@@ -1,7 +1,10 @@
 package com.zephrys.auter;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -166,11 +169,29 @@ public class Request_otp_activity extends ActionBarActivity {
 
                     if (res[6] == "true"){
                         t1.setText("Logged IN!");
+
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("SIGNUP_DONE", true);
+                        editor.commit();
+
+
+                        // TODO add parse user: db here!!!
+
+
+
+                        // Welcome new user!
+                        Toast toast = Toast.makeText(getActivity(), "Welcome " + res[4], Toast.LENGTH_SHORT);
+                        toast.show();
+
+                        // Activity calling!!
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
                     }
                     else{
                         t1.setText("Try Again!");
                     }
-
                 }
             });
 
@@ -322,6 +343,7 @@ public class Request_otp_activity extends ActionBarActivity {
                             String poa = object2.getString("poa");
                             object21 = new JSONObject(poa);
                             output[5] = object21.getString("pc");
+
                             for(int i = 0 ; i<=4 ; i++){
                                 Log.d("JSON", output[i]);
                             }
