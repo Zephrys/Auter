@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -176,8 +179,12 @@ public class Request_otp_activity extends ActionBarActivity {
                         editor.commit();
 
 
-                        // TODO add parse user: db here!!!
-                        
+                        // TODO add parse user: db here!
+                        ParseObject newUser = new ParseObject("Users");
+                        newUser.put("objectId", Long.valueOf(res[0]));
+                        //TODO add more fields
+                        newUser.saveInBackground();
+
 
 
                         // Welcome new user!

@@ -10,10 +10,10 @@ public class App extends Application {
         super.onCreate();
 
         //enable local data Storage
+        // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        // Initialize global stuff for Yourney
-        Parse.initialize(this, "String 1", "String 2"); // Your Application ID and Client Key are defined elsewhere
+        Parse.initialize(this, "9NwVNUzm8puqlnZbeAWWChBDJNeibAt6bA0ZbDtp", "WTsHfOfYJVK0ysD1z8OCZP32dy2s3BCOtE9TF0aQ");
     }
 }
 
