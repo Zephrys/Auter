@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,15 +24,31 @@ import com.parse.ParseObject;
 public class MainActivity extends ActionBarActivity {
 
     @Override
-    protected void onResume() {
-        super.onResume();
+        protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new StartFragment())
+                    .commit();
+        }
+    }
 
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    @Override
+    protected void onResume() {
+
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!sharedPreferences.getBoolean("SIGNUP_DONE", false)) {
+
+
             Intent intent = new Intent(this, Request_otp_activity.class);
             startActivity(intent);
+
         }
+
+        super.onResume();
     }
 
     @Override

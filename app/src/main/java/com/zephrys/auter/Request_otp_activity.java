@@ -166,8 +166,8 @@ public class Request_otp_activity extends ActionBarActivity {
                         e.printStackTrace();
                     }
 
-
-                    if (res[6] == "true"){
+                    // TODO change to ==.. for dev purposes!!!! :DDDD:
+                    if (res[6] != "true"){
                         t1.setText("Logged IN!");
 
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -177,7 +177,7 @@ public class Request_otp_activity extends ActionBarActivity {
 
 
                         // TODO add parse user: db here!!!
-
+                        
 
 
                         // Welcome new user!
@@ -187,7 +187,10 @@ public class Request_otp_activity extends ActionBarActivity {
                         // Activity calling!!
 
                         Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+
+                        getActivity().finish();
                     }
                     else{
                         t1.setText("Try Again!");
